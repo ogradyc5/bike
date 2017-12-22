@@ -1,0 +1,6 @@
+<%= simple_form_for(@store_bicycle) do |f| %>  
+   <%= render 'errors' %>  
+   <%= f.association :store %>  
+   <%= f.association :bicycle %>  
+   <%= f.submit 'Submit' %>  
+<% end %>

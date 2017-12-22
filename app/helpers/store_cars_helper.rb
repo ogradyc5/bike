@@ -1,0 +1,2 @@
+module StoreCarsHelper
+end

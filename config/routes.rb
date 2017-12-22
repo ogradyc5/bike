@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
 
-devise_for :users,:controllers => { :registrations => "user/registrations"}
+  resources :store_bicycles do
+	  resources :bookings
+	end
+  resources :stores
+  resources :bicycles
+  resources :bicycles
+  resources :store_cars
+#devise_for :users,:controllers => { :registrations => "user/registrations"}
+devise_for :users
+
 resources :welcome
 root to: 'welcome#index'
-devise_scope :user do
-    get "Sign up", to: "devise/registrations#new"
-    match '/sessions.user', to: 'devise/sessions#create' , via: :post
-end
+
  match '*path', via: :all, to: redirect('/404')
 end
