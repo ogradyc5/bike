@@ -8,6 +8,7 @@
     <%= link_to "Delete", store_bicycle_path(store_bicycle), data: { confirm: 'Are you sure?' }, method: :delete %>
     <%= link_to "Edit", edit_store_bicycle_path(store_bicycle) %>
     <%= link_to "Add booking", new_store_bicycle_booking_path(store_bicycle) %>
-    <%= link_to 'New Store Bicycle', new_store_bicycle_path %>
+    
   </div>
 <% end %>
+<%= link_to 'New Store Bicycle', new_store_bicycle_path %>
