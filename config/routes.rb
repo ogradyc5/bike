@@ -35,5 +35,7 @@ get 'my_friends', to: 'users#my_friends'
 get 'search_friends', to: 'users#search'
 get 'my_profile', to: 'users#my_profile'
 post 'add_friend', to: 'users#add_friend'
-#match '*path', via: :all, to: redirect('/404')
+match '*path', via: :all, to: redirect('/404')
+get '/404', to: 'errors#not_found'
+get '/500', to: 'errors#internal_server_error'
 end

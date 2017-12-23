@@ -26,7 +26,11 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @booking = Booking.find(params[:id])
+    begin
+      @booking = Booking.find(params[:id])
+    rescue StandardError => e
+      print e
+    end 
   end
 
   def destroy
