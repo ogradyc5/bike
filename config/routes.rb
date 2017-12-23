@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
 devise_for :users, :controllers => { :registrations => "user/registrations"}
-devise_scope :user do
-   get "Log out", to: "devise/sessions#destroy"
-   match '/sessions.user', to: 'devise/sessions#create' , via: :post
-  end
-#resources :stores do  
+
 resources :store_bicycles do  
     resources :bookings  
 end  
