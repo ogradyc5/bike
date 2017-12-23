@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   respond_to :html, :xml, :json
-  
+  #before_action :find_store
   before_action :find_store_bicycle
 
   def index

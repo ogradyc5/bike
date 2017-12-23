@@ -6,7 +6,7 @@ resources :store_bicycles do
     resources :bookings  
 end  
 #end
-
+resources :bookings, only: [:create, :destroy]
 resources :store_bicycles
 
 
