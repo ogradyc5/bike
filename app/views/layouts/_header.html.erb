@@ -27,11 +27,11 @@
           </div>  
        
 
-      <ul class="nav navbar-nav navbar-right col-md-5">
-        <li class="col-md-8 user-name text-right">
-          <i class="fa fa-user"></i>
-            <%= current_user.first_name.present? ? current_user.first_name : current_user.email %>
-        </li>
+      <ul class="nav navbar-nav navbar-right">
+          <li class="user-name text-right">
+            <i class="fa fa-user"></i>
+              <%= current_user.first_name.present? ? current_user.first_name : current_user.email %>
+          </li>
         <%= link_to new_user_registration_path, class: 'btn btn-info sign-up' do %><i class="glyphicon glyphicon-user"></i>Sign Up <% end %>
        
         <% if user_signed_in? %>

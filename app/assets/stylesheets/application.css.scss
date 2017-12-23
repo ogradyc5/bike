@@ -24,6 +24,7 @@
 * {
     font-family: 'Bungee', cursive;
     margin: 0;
+    font-size: 10px;
     
 }
 
@@ -172,6 +173,11 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
   
+}
+
+.user-name.text-right {
+    margin-right: 25px;
+    margin-left: 25px;
 }
 
 body, html {
