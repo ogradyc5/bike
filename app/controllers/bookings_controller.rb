@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   respond_to :html, :xml, :json
   before_action :find_store
   before_action :find_store_bicycle
-
+  
   def index
     @bookings = Booking.where("store_bicycle_id = ? AND end_time >= ?", @store_bicycle.id, Time.now).order(:start_time)
     respond_with @bookings
@@ -10,6 +10,7 @@ class BookingsController < ApplicationController
 
   def new
     @booking = Booking.new(store_bicycle_id: @store_bicycle.id)
+    #@booking = Booking.new(id: @store_bike)
   end
 
   def create
@@ -17,7 +18,8 @@ class BookingsController < ApplicationController
     @booking.store_bicycle = @store_bicycle
     if @booking.save
       @booking.create_activity :create, owner: current_user
-      redirect_to store_bicycle_bookings_path(@store_bicycle, method: :get)
+      #redirect_to store_bicycle_bookings_path(@store_bicycle, method: :get)
+      redirect_to my_profile_path
     else
       render 'new'
     end
@@ -30,9 +32,10 @@ class BookingsController < ApplicationController
   def destroy
     @booking = Booking.find(params[:id]).destroy
     if @booking.destroy
-      @booking.create_activity :destroy, owner: current_user
+      
       flash[:notice] = "Booking: #{@booking.start_time.strftime('%e %b %Y %H:%M%p')} to #{@booking.end_time.strftime('%e %b %Y %H:%M%p')} deleted"
       redirect_to store_bicycle_bookings_path(@store_bicycle)
+      #@booking.create_activity :destroy, owner: current_user
     else
       render 'index'
     end

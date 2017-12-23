@@ -12,7 +12,8 @@ resources :bicycles do
   end 
 end 
 
-resources :bookings, only: [:create, :destroy]
+#resources :bookings, only: [:create, :destroy]
+resources :bookings
 resources :store_bicycles
 resources :activities
 resources :pages

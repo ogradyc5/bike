@@ -28,3 +28,5 @@ $(document).on('turbolinks:load', function(){
     $('#results').html(data.responseText)
   })
 })
+
+$('.timeago').timeago()
