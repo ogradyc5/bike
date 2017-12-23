@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
-  include Error::ErrorHandler
+  
   respond_to :html, :json
-  config.exceptions_app = routes
+
   before_action :authenticate_user!
   protect_from_forgery with: :exception
  
