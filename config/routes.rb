@@ -2,12 +2,12 @@ Rails.application.routes.draw do
 
 
 #resources :stores do  
-   resources :store_bicycles do  
-     resources :bookings  
-   end  
+resources :store_bicycles do  
+    resources :bookings  
+end  
 #end
 
-
+resources :store_bicycles
 
 
 resources :stores
