@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bike</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>Bicycle</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'load'%>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'load' %>
   <%= csrf_meta_tags %>
 </head>
+<% unless controller_name == "welcome" %>
+<%= render 'layouts/header' %>
+<% end %>
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <%= yield %>
-
+  <%= render 'layouts/footer' %>
 </body>
 </html>

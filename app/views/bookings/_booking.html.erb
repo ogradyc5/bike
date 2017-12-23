@@ -1,0 +1,17 @@
+
+    <% obj.each do |booking| %>
+    
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="well well-lg">
+                    <div class="bicycle-title">
+                        <%= link_to booking.store_bicycle.bicycle.name %>
+                        <%= link_to booking.store_bicycle.store.name if current_user.id == booking.user_id%>
+                        <%= link_to booking.length if current_user == booking.user%>
+                    </div>
+                    <small>Created by: <%= booking.user_id if booking.user_id%>,
+                    <%= time_ago_in_words(booking.created_at) %> ago,
+                    last updated: <%= time_ago_in_words(booking.updated_at) %> ago</small>
+                </div>
+            </div>
+        </div>

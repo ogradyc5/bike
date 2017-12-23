@@ -1,7 +1,7 @@
 class StoreBicyclesController < ApplicationController
+  before_action :find_store
+  #before_action :set_store_bicycle, only: [:show, :edit, :update, :destroy]
   
- # before_action :set_store_bicycle, only: [:edit, :update, :destroy]
- # before_action :find_store 
 
   def index  
     if @store.nil?  
@@ -10,7 +10,24 @@ class StoreBicyclesController < ApplicationController
       @store_bicycles = StoreBicycle.where("store_id = ?", @store)  
     end  
   end  
+  
+  def find_store  
+    if params[:store_id]  
+      @store = Store.find_by_id(params[:store_id])  
+    end  
+  end
 
+  def search
+    if params[:storebicycle].blank?
+        flash.now[:danger] = "You have entered an empty search"
+    else
+        @storebicycle = StoreBicycle.new_from_lookup(params[:storebicycle])
+        flash.now[:danger] = "You have entered an invalid search" unless
+      @storebicycle
+    end
+    render partial: 'users/result'
+  end
+  
   def new
     @store_bicycle = StoreBicycle.new
   end

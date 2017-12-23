@@ -1,31 +1,45 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html lang='en'>
 
-<h1>Listing Bicycles</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Image</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bicycles.each do |bicycle| %>
-      <tr>
-        <td><%= bicycle.name %></td>
-        <td><%= bicycle.price %></td>
-        <td><%= bicycle.image %></td>
-        <td><%= link_to 'Show', bicycle %></td>
-        <td><%= link_to 'Edit', edit_bicycle_path(bicycle) %></td>
-        <td><%= link_to 'Destroy', bicycle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Bicycle', new_bicycle_path %>
+<h1 class="title">Bicycles for Rent</h1>
+        
+<header>
+ <% if signed_in? && (current_user.admin?) %>
+    <td><h3> <%= link_to 'New Bicycle', new_bicycle_path %> </h3></td>
+<% end %>
+</header>
+  <% @bicycles.each do |bicycle| %>
+  
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail thumb-box">
+        <h2 style="text-align:center;"><%= bicycle.name %></h2>
+        <%= image_tag(bicycle.image, size: "250x300") %>
+        <h5 style="text-align:center;"><%= bicycle.price %></h2>
+        <div class="caption" style="text-align:center;">
+          
+          <%= link_to like_bicycle_path(bicycle), class: 'like', method: :put do %>
+          <button type="button" class="btn btn-info" aria-label = "Left align">
+            <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+            <span class="badge"><%= bicycle.get_upvotes.size %></span>
+          </button>
+          <% end %>
+          
+          <%= link_to unlike_bicycle_path(bicycle), class: 'like', method: :put do %>
+          <button type="button" class="btn btn-info" aria-label = "Left align">
+            <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
+            <span class="badge"><%= bicycle.get_downvotes.size %></span>
+          </button>
+        <br>
+        <!--td><%= link_to 'Show', @bicycle %> </td><br-->
+          <% if signed_in? && (current_user.admin?) %>
+            <td><%= link_to 'Edit', edit_bicycle_path(bicycle) %></td><br>
+            <td><%= link_to 'Destroy', bicycle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+   
+  
+  <% end %>
+  </html>

@@ -10,8 +10,20 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+/* global $ */
+//= require underscore
 //= require bootstrap-sprockets
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require twitter/bootstrap
+//= require turbolinks
 //= require_tree .
+//= require moment 
+//= require fullcalendar
+//= require bootstrap
+$(document).on('turbolinks:load', function(){
+  $('#storebicycle-lookup-form').on('ajax:complete', function(event, data, status){
+    $('#results').html(data.responseText)
+  })
+})

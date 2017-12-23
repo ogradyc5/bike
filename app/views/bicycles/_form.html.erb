@@ -1,13 +1,35 @@
-<%= simple_form_for(@bicycle) do |f| %>
-  <%= f.error_notification %>
+<!DOCTYPE html>
+<html lang='en'>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :price %>
-    <%= f.input :image %>
+
+<%= form_for(@bicycle) do |f| %>
+  <% if @bicycle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bicycle.errors.count, "error") %> prohibited this bicycle from being saved:</h2>
+
+      <ul>
+      <% @bicycle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %><br><br>
+    <%= f.label :price %><br>
+    <%= f.number_field :price, value: number_to_currency(f.object.price.to_f, delimiter: '', unit: ''), :step => 0.01 %><br><br>
+    <%= f.label :image %><br>
+    <%= f.file_field :image %>
+    <% if f.object.image? %>
+      <%= image_tag f.object.image.thumb.url %>
+      <%= f.label :remove_image %>
+      <%= f.check_box :remove_image %>
+    <% end %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="actions">
+    <%= f.submit %>
   </div>
 <% end %>
+</html>

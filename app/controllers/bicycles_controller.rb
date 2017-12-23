@@ -1,28 +1,25 @@
 class BicyclesController < ApplicationController
-  before_action :set_bicycle, only: [:show, :edit, :update, :destroy]
+  before_action :set_bicycle, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
-  # GET /bicycles
-  # GET /bicycles.json
+
   def index
-    @bicycles = Bicycle.all
+    @bicycles = Bicycle.all.order(:cached_votes_score => :desc)
   end
 
-  # GET /bicycles/1
-  # GET /bicycles/1.json
   def show
   end
+  
+  def list
+    @bookings = @user.bookings.all if @user
+  end 
 
-  # GET /bicycles/new
   def new
     @bicycle = Bicycle.new
   end
 
-  # GET /bicycles/1/edit
   def edit
   end
 
-  # POST /bicycles
-  # POST /bicycles.json
   def create
     @bicycle = Bicycle.new(bicycle_params)
 
@@ -37,8 +34,6 @@ class BicyclesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /bicycles/1
-  # PATCH/PUT /bicycles/1.json
   def update
     respond_to do |format|
       if @bicycle.update(bicycle_params)
@@ -51,8 +46,6 @@ class BicyclesController < ApplicationController
     end
   end
 
-  # DELETE /bicycles/1
-  # DELETE /bicycles/1.json
   def destroy
     @bicycle.destroy
     respond_to do |format|
@@ -60,6 +53,20 @@ class BicyclesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  
+  def upvote
+    @bicycle.upvote_from current_user
+    redirect_to bicycles_path
+  end 
+
+  def downvote
+    @bicycle.downvote_from current_user
+    redirect_to bicycles_path
+  end
+
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
