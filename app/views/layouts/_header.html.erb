@@ -35,7 +35,7 @@
         <%= link_to new_user_registration_path, class: 'btn btn-info sign-up' do %><i class="glyphicon glyphicon-user"></i>Sign Up <% end %>
        
         <% if user_signed_in? %>
-          <%= link_to destroy_user_session_path, :method => :delete, class: 'btn btn-default log-out' do %><i class="glyphicon glyphicon-sign-out"></i>Log Out <% end %>
+          <%= link_to destroy_user_session_path, :method => :delete %> Log Out <% end %>
         <% else %>
           <%= link_to new_user_session_path,  class: 'btn btn-default log-in' do %><i class="glyphicon glyphicon-sign-in"></i>Log In <% end %>
         <% end %>
