@@ -1,8 +1,15 @@
 class StoreBicyclesController < ApplicationController
+  
+  before_action :set_store_bike, only: [:show, :edit, :update, :destroy]
+ # before_action :find_store 
 
-  def index
-    @store_bicycles = StoreBicycle.all
-  end
+  def index  
+    if @store.nil?  
+      @store_bicycles = StoreBicycle.all  
+    else
+      @store_bicycles = StoreCycle.where("store_id = ?", @store)  
+    end  
+  end  
 
   def new
     @store_bicycle = StoreBicycle.new
@@ -12,7 +19,7 @@ class StoreBicyclesController < ApplicationController
     @store_bicycle = StoreBicycle.create(store_bicycle_params)
     if @store_bicycle.save
       redirect_to store_bicycles_path
-      flash[:notice] = "#{name} created"
+      flash[:notice] = "#{id} created"
     else
       render 'new'
       flash[:error] = "Unable to create store bicycle. Please try again"
@@ -46,7 +53,7 @@ class StoreBicyclesController < ApplicationController
       params.require(:store_bicycle).permit(:name, :delete)
     end
     def store_bicycle_params
-      params.require(:store_bicycle).permit(:bicycle_id, :store_id)
+      params.require(:store_bicycle).permit(:store_id, :bicycle_id)
     end
 
 

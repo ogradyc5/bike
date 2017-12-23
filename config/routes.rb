@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
 
-  resources :store_bicycles do
-	  resources :bookings
-	end
-  resources :stores
-  resources :bicycles
-  resources :bicycles
-  resources :store_cars
+
+#resources :stores do  
+   resources :store_bicycles do  
+     resources :bookings  
+   end  
+#end
+
+
+
+
+resources :stores
+resources :bicycles
 #devise_for :users,:controllers => { :registrations => "user/registrations"}
 devise_for :users
 

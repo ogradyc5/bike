@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171222225058) do
+ActiveRecord::Schema.define(version: 20171223002254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,8 +34,12 @@ ActiveRecord::Schema.define(version: 20171222225058) do
   add_index "bookings", ["store_bicycle_id"], name: "index_bookings_on_store_bicycle_id", using: :btree
 
   create_table "store_bicycles", force: :cascade do |t|
-    t.string "name"
+    t.integer "store_id"
+    t.integer "bicycle_id"
   end
+
+  add_index "store_bicycles", ["bicycle_id"], name: "index_store_bicycles_on_bicycle_id", using: :btree
+  add_index "store_bicycles", ["store_id"], name: "index_store_bicycles_on_store_id", using: :btree
 
   create_table "stores", force: :cascade do |t|
     t.string   "name"
@@ -65,4 +69,6 @@ ActiveRecord::Schema.define(version: 20171222225058) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "bookings", "store_bicycles"
+  add_foreign_key "store_bicycles", "bicycles"
+  add_foreign_key "store_bicycles", "stores"
 end
