@@ -1,6 +1,6 @@
 class BicyclesController < ApplicationController
   before_action :set_bicycle, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
-  decorates_assigned :bicycle
+  
 
   def index
     @bicycles = Bicycle.all.order(:cached_votes_score => :desc)

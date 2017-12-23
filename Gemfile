@@ -6,7 +6,6 @@ gem "paperclip", "~> 5.0.0"
 # Use sqlite3 as the database for Active Record
 gem 'puma'
 gem 'bootstrap-generators'
-gem 'draper'
 gem 'google-search'
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'google-webfonts-rails', '~> 0.0.4'
