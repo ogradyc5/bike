@@ -1,3 +1,5 @@
+
+
 <h3 class="title"> Bookings for 
 <%= @store_bicycle.store.name %>
 <%= @store_bicycle.bicycle.name %> 
@@ -5,22 +7,24 @@
 
 <% if @bookings %>
   <% if @bookings.size > 0 %>
-  <table class="bookings_table">
-        <tr>
-          <td>Start</td><br>
-          <td>End</td><br>
-          <td>Price</td>
-        </tr>
-  
+    <table class="table table-default">
+    <thead>
+      <tr>
+        <td>Start</td><br>
+        <td>End</td><br>
+        <td>Price</td>
+      </tr>
+    </thead>
+    <tbody>
       <% @bookings.each do |booking| %>
       <tr>
         <td><%= booking.start_time.strftime('%e %b %Y %H:%M%p') %></td>
         <td><%= (booking.calculate_end_time + 60).strftime('%e %b %Y %H:%M%p') %></td>
         <td><%= (booking.sum_price) %></td>
         <body>
-            <td><small>Booked by: <%= booking.user_id if booking.user_id%> <%= link_to gravatar_for(booking.user), user_path(booking.user_id) if booking.user_id%>  <!--li><!--%= link_to gravatar_for(booking.user_id), user_path(booking.user_id) %></li-->
-            <!--%= time_ago_in_words(booking.created_at) %> ago,
-            last updated: <!%= time_ago_in_words(booking.updated_at) %> ago</small></td-->
+        <td><small>Booked by: <%= booking.user_id if booking.user_id%> <%= link_to gravatar_for(booking.user), user_path(booking.user_id) if booking.user_id%>  <!--li><!--%= link_to gravatar_for(booking.user_id), user_path(booking.user_id) %></li-->
+              <%= time_ago_in_words(booking.created_at) %> ago,
+              last updated: <%= time_ago_in_words(booking.updated_at) %> ago</small></td>
         </body>
         <% if signed_in? && (current_user == booking.user) %> 
         <td><%= link_to "Delete", store_bicycle_booking_path(@store_bicycle, booking), data: { confirm: 'Are you sure?' }, method: :delete %>
@@ -28,11 +32,11 @@
         <td><%= link_to "Edit", edit_store_bicycle_booking_path(@store_bicycle, booking) %>
         </td>
       </tr>
-    
+      </tbody>
     </table>
     <% end %>
-    <% end %>
-    <% end %>
+  <% end %>
+<% end %>
   <% else %><br>
     <h5 class="title">No Bookings Yet!</h5>
   <% end %>

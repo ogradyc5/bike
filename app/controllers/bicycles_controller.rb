@@ -19,7 +19,8 @@ class BicyclesController < ApplicationController
 
   def edit
   end
-
+  
+ 
   def create
     @bicycle = Bicycle.new(bicycle_params)
 

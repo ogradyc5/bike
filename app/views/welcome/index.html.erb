@@ -6,7 +6,7 @@
           <% if current_user %>
               <h2>Welcome <%= current_user.email %></h2>
           <% else %>
-              <h2>Cycle Hub</h2>
+              <h2>Rent A Bike</h2>
           <% end %>
             <%= link_to new_user_registration_path, class: 'btn btn-info sign-up' do %><i class="glyphicon glyphicon-user"></i>Sign Up <% end %>
             <% if user_signed_in? %>

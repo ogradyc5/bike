@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 devise_for :users, :controllers => { :registrations => "user/registrations"}
 resources :users
+
 resources :store_bicycles do  
     resources :bookings  
 end  
@@ -33,5 +34,5 @@ get 'my_friends', to: 'users#my_friends'
 get 'search_friends', to: 'users#search'
 get 'my_profile', to: 'users#my_profile'
 post 'add_friend', to: 'users#add_friend'
-match '*path', via: :all, to: redirect('/404')
+#match '*path', via: :all, to: redirect('/404')
 end
