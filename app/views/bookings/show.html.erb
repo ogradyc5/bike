@@ -14,11 +14,10 @@
         <td>Booked by:</td>
           <td><%= link_to gravatar_for(@booking.user), user_path(@booking.user) %></td>
             <td class="booking-title">
-             <%= link_to @booking.user.email, user_path(@booking.user) %>
+             <%= link_to @booking.user.email, user_path(@booking.user) %> :
+             <%= pluralize(@booking.user.bookings.count, "booking") if @booking.user.bookings %>
             </td>
-            <li><small>
-              <%= pluralize(@booking.user.bookings.count, "booking") if @booking.user.bookings %>
-            </small></li>
+        
           </li>
         </li>
       </div>

@@ -13,6 +13,10 @@
         <td>Start</td><br>
         <td>End</td><br>
         <td>Price</td>
+        <td>User</td>
+        <td>Created</td>
+        <td>Updated</td>
+        
       </tr>
     </thead>
     <tbody>
@@ -22,9 +26,9 @@
         <td><%= (booking.calculate_end_time + 60).strftime('%e %b %Y %H:%M%p') %></td>
         <td><%= (booking.sum_price) %></td>
         <body>
-        <td><small>Booked by: <%= booking.user_id if booking.user_id%> <%= link_to gravatar_for(booking.user), user_path(booking.user_id) if booking.user_id%>  
-              <%= time_ago_in_words(booking.created_at) unless booking.created_at.blank? %> ago,
-              last updated: <%= time_ago_in_words(booking.updated_at) unless booking.updated_at.blank? %> ago</small></td>
+        <td><small><%= booking.user_id if booking.user_id%> <%= link_to gravatar_for(booking.user), user_path(booking.user_id) if booking.user_id%></td>
+        <td><%= time_ago_in_words(booking.created_at) unless booking.created_at.blank? %> </td>
+        <td><%= time_ago_in_words(booking.updated_at) unless booking.updated_at.blank? %> </small></td>
         </body>
         <% if signed_in? && (current_user == booking.user) %> 
         <td><%= link_to "Delete", store_bicycle_booking_path(@store_bicycle, booking), data: { confirm: 'Are you sure?' }, method: :delete %>
