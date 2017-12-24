@@ -2,8 +2,10 @@ Rails.application.routes.draw do
 devise_for :users, :controllers => { :registrations => "user/registrations"}
 resources :users
 
-resources :store_bicycles do  
+resources :stores do  
+  resources :store_bicycles do  
     resources :bookings  
+  end 
 end  
 resources :bicycles do
   member do

@@ -1,13 +1,13 @@
-
-
-<h3 class="title"> Bookings for 
-<%= @store_bicycle.store.name %>
-<%= @store_bicycle.bicycle.name %> 
-</h3>
-
-<% if @bookings %>
-  <!--% if @bookings.size > 0 %-->
+<!--% if @booking %-->
+<% if @bookings.size > 0 %>
   <% @bookings.each do |booking| %>
+
+  <h3 class="title"> Bookings for 
+  <%= @store_bicycle.store.name %>
+  <%= @store_bicycle.bicycle.name %> 
+  </h3>
+
+
     <table class="table table-default">
     <thead>
       <tr>
@@ -32,9 +32,9 @@
         <td><%= time_ago_in_words(booking.updated_at) unless booking.updated_at.blank? %> </small></td>
         </body>
         <% if signed_in? && (current_user == booking.user) %> 
-        <td><%= link_to "Delete", store_bicycle_booking_path(@store_bicycle, booking), data: { confirm: 'Are you sure?' }, method: :delete %>
+        <td><%= link_to "Delete", store_store_bicycle_booking_path(@store, @store_bicycle, booking), data: { confirm: 'Are you sure?' }, method: :delete %>
         </td>
-        <td><%= link_to "Edit", edit_store_bicycle_booking_path(@store_bicycle, booking) %>
+        <td><%= link_to "Edit", edit_store_store_bicycle_booking_path(@store, @store_bicycle, booking) %>
         </td>
       </tr>
       </tbody>

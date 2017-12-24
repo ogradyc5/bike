@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang='en'>
     <h1 class="title">Search Result</h1>  
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'load'%>
+    
     <% @results.each do |result| %> 
         <!--%= result.stores.name %> <!%= result.name %><br>  
     <!--% end %-->
-        <h3 = "title"><%= result.class.name %>: <%= result.name %></h3>
+        <h5 class = "title"><%= result.class.name %>: <%= result.name %></h5>
     <% end %>
     
 </html>

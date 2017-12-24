@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 
-<h1 class="title">CycleHub Stores</h1>
+<h1 class="title">Rent-a-Bike Stores</h1>
 
   <% @stores.each do |store| %>
   
@@ -21,7 +21,8 @@
               <div class="well well-lg">
                 <div class="store-name">
                   <h2><%= store.name %></h2>
-                    <%= link_to 'Store Bicycles', store_bicycles_path(store) %>
+                    <!--%= image_tag(store.image, size: "250x300") %-->
+                    <%= link_to 'Store Bicycles', store_store_bicycles_path(store) %>
                     <% if signed_in? && (current_user.admin?) %>
                       <%= link_to 'Edit', edit_store_path(store) %>
                       <%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -33,6 +34,6 @@
           <% end %>
    <% if signed_in? && (current_user.admin?) %>
      <%= link_to 'New Store', new_store_path %>
-   <% end %>
 
+<% end %>
 </html>

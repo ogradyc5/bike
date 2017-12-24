@@ -1,10 +1,11 @@
 class BookingsController < ApplicationController
-  respond_to :html, :xml, :json
+  
   before_action :find_store
   before_action :find_store_bicycle
+  respond_to :html, :xml, :json
   
   def index
-    @bookings = Booking.where("store_bicycle_id = ? AND end_time >= ?", @store_bicycle.id, Time.now).order(:start_time)
+    @bookings = Booking.where("store_bicycle_id = ? AND end_time >= ?", @store_bicycle, Time.now).order(:start_time)
     respond_with @bookings
   end
 
@@ -18,7 +19,7 @@ class BookingsController < ApplicationController
     @booking.store_bicycle = @store_bicycle
     if @booking.save
       @booking.create_activity :create, owner: current_user
-      redirect_to store_bicycle_bookings_path(@store_bicycle, method: :get)
+      redirect_to store_store_bicycle_booking_path(@store, @store_bicycle, @booking, method: :get)
       #redirect_to my_profile_path
     else
       render 'new'
@@ -32,15 +33,21 @@ class BookingsController < ApplicationController
       print e
     end 
   end
+  
+  def find_store  
+    if params[:store_id]  
+      @store = Store.find_by_id(params[:store_id])  
+    end
+  end
 
   def destroy
     @booking = Booking.find(params[:id]).destroy
     if @booking.destroy
       
       flash[:notice] = "Booking: #{@booking.start_time.strftime('%e %b %Y %H:%M%p')} to #{@booking.end_time.strftime('%e %b %Y %H:%M%p')} deleted"
-      #redirect_to store_bicycle_bookings_path(@store_bicycle)
-      #@booking.create_activity :destroy, owner: current_user
-      redirect_to my_profile_path
+      redirect_to booking_path(@booking)
+     # @activity.create_activity :destroy, owner: current_user
+      #redirect_to my_profile_path
     else
       render 'index'
     end
@@ -61,7 +68,7 @@ class BookingsController < ApplicationController
       if request.xhr?
         render json: {status: :success}.to_json
       else
-        redirect_to store_bicycle_bookings_path(@store_bicycle)
+        redirect_to store_store_bicycle_bookings_path(@store, @store_bicycle)
       end
     else
       render 'edit'
@@ -73,10 +80,10 @@ class BookingsController < ApplicationController
   def save booking
     if @booking.save
         flash[:notice] = 'booking added'
-        redirect_to store_bicycle_booking_path(@store_bicycle, @booking)
-      else
+        redirect_to store_store_bicycle_booking_path(@store, @store_bicycle, @booking)
+    else
         render 'new'
-      end
+    end
   end
 
   def find_store_bicycle
@@ -85,10 +92,6 @@ class BookingsController < ApplicationController
     end
   end
   
-  def find_store  
-    if params[:store_id]  
-      @store = Store.find_by_id(params[:store_id])  
-    end
-  end
+  
 
 end

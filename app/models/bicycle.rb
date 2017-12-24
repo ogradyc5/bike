@@ -2,7 +2,7 @@ class Bicycle < ActiveRecord::Base
     validates :name, presence: true, uniqueness: true 
    
     has_many :stores, :through => :store_bicycles 
-    #has_many :bicycles, :through => :store_bicycles
+    has_many :bicycles, :through => :store_bicycles
     has_many :store_bicycles, :dependent => :destroy
     has_many :bookings, through: :store_bicycles
     acts_as_votable
