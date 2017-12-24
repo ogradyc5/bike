@@ -9,8 +9,8 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @booking = Booking.new(store_bicycle_id: @store_bicycle.id)
-    #@booking = Booking.new(id: @store_bike)
+    #@booking = Booking.new(store_bicycle_id: @store_bicycle.id)
+    @booking = Booking.new(id: @store_bicycle)
   end
 
   def create
@@ -18,8 +18,8 @@ class BookingsController < ApplicationController
     @booking.store_bicycle = @store_bicycle
     if @booking.save
       @booking.create_activity :create, owner: current_user
-      #redirect_to store_bicycle_bookings_path(@store_bicycle, method: :get)
-      redirect_to my_profile_path
+      redirect_to store_bicycle_bookings_path(@store_bicycle, method: :get)
+      #redirect_to my_profile_path
     else
       render 'new'
     end
@@ -38,8 +38,9 @@ class BookingsController < ApplicationController
     if @booking.destroy
       
       flash[:notice] = "Booking: #{@booking.start_time.strftime('%e %b %Y %H:%M%p')} to #{@booking.end_time.strftime('%e %b %Y %H:%M%p')} deleted"
-      redirect_to store_bicycle_bookings_path(@store_bicycle)
+      #redirect_to store_bicycle_bookings_path(@store_bicycle)
       #@booking.create_activity :destroy, owner: current_user
+      redirect_to my_profile_path
     else
       render 'index'
     end

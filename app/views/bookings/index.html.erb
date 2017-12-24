@@ -6,7 +6,8 @@
 </h3>
 
 <% if @bookings %>
-  <% if @bookings.size > 0 %>
+  <!--% if @bookings.size > 0 %-->
+  <% @bookings.each do |booking| %>
     <table class="table table-default">
     <thead>
       <tr>
@@ -20,7 +21,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @bookings.each do |booking| %>
+      <!--% @bookings.each do |booking| %-->
       <tr>
         <td><%= booking.start_time.strftime('%e %b %Y %H:%M%p') %></td>
         <td><%= (booking.calculate_end_time + 60).strftime('%e %b %Y %H:%M%p') %></td>
@@ -38,8 +39,8 @@
       </tr>
       </tbody>
     </table>
-    <% end %>
-  <% end %>
+   <% end %>
+  <!--% end %-->
 <% end %>
   <% else %><br>
     <h5 class="title">No Bookings Yet!</h5>
